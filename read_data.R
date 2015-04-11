@@ -1,19 +1,3 @@
-readRangeOfFile <- function(filename) {
-  conn <- file(filename, "rt")
-  outConn<-textConnection("accu", open="w", local=T)
-  writeLines(readLines(conn, n=1), outConn)
-  
-  while (length(line <- readLines(conn, n = 1, warn = FALSE)) > 0) {
-    if ( grepl("^(1/2/2007|2/2/2007).*", line) ) {
-      writeLines(line, outConn)
-    }
-  }
-  close(conn)
-  close(outConn)
-  
-  read.table(text=accu)
-}
-
 filterConnection <- function(conn, filterString) {
   outConn<-textConnection("accu", open="w", local=T)
   writeLines(readLines(conn, n=1), outConn)
